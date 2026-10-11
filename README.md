@@ -171,11 +171,6 @@ Desde el Jump se permiten HTTPS (443), SSH (22) y RDP (3389) hacia 10.8.47.10. S
 
 ![Log JUMP_TO_WEB y DENY_JUMP_TO_WEB](imagenes/23_log_forward_jump_web.png)
 
-## Scripts
-
-- Configuración de IP de equipos finales: [`scripts/ip_equipos_infra2.sh`](scripts/ip_equipos_infra2.sh)
-- Pruebas del usuario sin privilegios: [`scripts/pruebas_user_sinpriv.sh`](scripts/pruebas_user_sinpriv.sh)
-- Pruebas desde el Jump: [`scripts/pruebas_jump.ps1`](scripts/pruebas_jump.ps1)
 
 ## Running-configs y respaldo
 
