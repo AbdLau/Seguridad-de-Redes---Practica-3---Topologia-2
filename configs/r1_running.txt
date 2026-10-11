@@ -1,0 +1,130 @@
+R1#show running-config
+Building configuration...
+
+Current configuration : 1818 bytes
+!
+! Last configuration change at 23:17:38 UTC Sat Oct 10 2026
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$mfwO$9Og0YeGUcHVYyGbtZVX3r0
+!
+no aaa new-model
+no ip source-route
+no ip icmp rate-limit unreachable
+!
+!
+!
+ip dhcp excluded-address 10.8.46.1
+!
+ip dhcp pool VLAN10_USUARIOS
+ network 10.8.46.0 255.255.255.128
+ default-router 10.8.46.1
+ dns-server 8.8.8.8
+!
+!
+!
+no ip bootp server
+no ip domain lookup
+ip domain name lab.local
+ip cef
+no ipv6 cef
+!
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+!
+!
+username admin privilege 15 secret 5 $1$H7Ym$Vt3rNsa.ABawU.G0a1uXH1
+!
+!
+!
+!
+!
+ip tcp synwait-time 5
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ description WAN_R2
+ ip address 200.8.47.2 255.255.255.252
+ speed auto
+ duplex auto
+ no cdp enable
+!
+interface FastEthernet0/1
+ description LAN_USUARIOS
+ ip address 10.8.46.1 255.255.255.128
+ speed auto
+ duplex auto
+ no cdp enable
+!
+interface GigabitEthernet1/0
+ description LAN_PRIVILEGED
+ no ip address
+ shutdown
+ negotiation auto
+!
+interface GigabitEthernet2/0
+ no ip address
+ shutdown
+ negotiation auto
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+ip route 0.0.0.0 0.0.0.0 200.8.47.1
+ip route 10.8.47.0 255.255.255.248 200.8.47.1
+ip route 10.8.47.8 255.255.255.248 200.8.47.1
+ip route 200.8.47.4 255.255.255.252 200.8.47.1
+!
+no cdp run
+!
+!
+!
+control-plane
+!
+banner motd ^CAcceso autorizado solo para personal autorizado^C
+!
+line con 0
+ exec-timeout 5 0
+ privilege level 15
+ logging synchronous
+ login local
+ stopbits 1
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+ stopbits 1
+line vty 0 4
+ exec-timeout 5 0
+ login local
+ transport input ssh
+!
+!
+end
+
+R1#
